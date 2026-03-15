@@ -37,11 +37,18 @@ export const translations = {
     recipeList: {
       subtitle: 'Healthy cooking made simple',
       searchPlaceholder: 'Search healthy recipes',
-      filters: ['All', 'Breakfast', 'Lunch', 'Dinner'],
+      filters: [
+        { label: '100% Plant', icon: 'spa', key: 'vegan' },
+        { label: 'Egg/Dairy OK', icon: 'egg_alt', key: 'dairy-ok' },
+        { label: 'Under 15 min', icon: 'timer', key: 'quick' },
+        { label: 'Few Ingredients', icon: 'kitchen', key: 'simple' },
+        { label: 'Beginner', icon: 'potted_plant', key: 'beginner' },
+      ],
+      difficultyLabels: ['', 'Very Easy', 'Easy', 'Normal', 'Hard', 'Very Hard'],
       recipes: [
-        { title: 'Crispy Tofu Stir-fry' },
-        { title: 'Pesto Whole Grain Pasta' },
-        { title: 'Spring Green Salad' },
+        { title: 'Crispy Tofu Stir-fry', time: '20 min', difficulty: 3, vegan: true },
+        { title: 'Pesto Whole Grain Pasta', time: '15 min', difficulty: 2, vegan: true },
+        { title: 'Spring Green Salad', time: '10 min', difficulty: 1, vegan: true },
       ],
     },
     // Recipe Detail
@@ -49,10 +56,10 @@ export const translations = {
       title: 'Avocado & Poached Egg Toast',
       description: 'A high-protein breakfast that stays fresh and light. Perfect for starting a productive day.',
       time: '15 min',
-      energy: '320 kcal',
+      difficulty: 2,
+      difficultyLabels: ['', 'Very Easy', 'Easy', 'Normal', 'Hard', 'Very Hard'],
       timeLabel: 'Time',
       difficultyLabel: 'Difficulty',
-      energyLabel: 'Energy',
       ingredients: 'Ingredients',
       servings: '2 Servings',
       instructions: 'Instructions',
@@ -88,7 +95,7 @@ export const translations = {
     // Common
     appName: 'One Light Meal',
     // Bottom Nav
-    nav: { home: '홈', recipe: '레시피', about: '소개' },
+    nav: { home: 'Home', recipe: 'Recipe', about: 'About' },
     // Home
     home: {
       hero: {
@@ -97,7 +104,7 @@ export const translations = {
         after: '보다, 기분 좋은 식물성 한 끼.',
       },
       search: '레시피, 재료 검색...',
-      curatedPicks: '큐레이션 레시피',
+      curatedPicks: 'Curated Picks',
       seeAll: '전체보기',
       categories: '카테고리',
       recipes: [
@@ -122,11 +129,18 @@ export const translations = {
     recipeList: {
       subtitle: '쉽고 건강한 요리',
       searchPlaceholder: '건강한 레시피 검색',
-      filters: ['전체', '아침', '점심', '저녁'],
+      filters: [
+        { label: '완전 식물성', icon: 'spa', key: 'vegan' },
+        { label: '달걀/유제품 먹어요', icon: 'egg_alt', key: 'dairy-ok' },
+        { label: '15분 이내 요리', icon: 'timer', key: 'quick' },
+        { label: '냉장고 재료 적음', icon: 'kitchen', key: 'simple' },
+        { label: '초보용', icon: 'potted_plant', key: 'beginner' },
+      ],
+      difficultyLabels: ['', '아주 쉬움', '쉬움', '보통', '어려움', '매우 어려움'],
       recipes: [
-        { title: '바삭 두부 볶음' },
-        { title: '페스토 통곡물 파스타' },
-        { title: '봄나물 그린 샐러드' },
+        { title: '바삭 두부 볶음', time: '20분', difficulty: 3, vegan: true },
+        { title: '페스토 통곡물 파스타', time: '15분', difficulty: 2, vegan: true },
+        { title: '봄나물 그린 샐러드', time: '10분', difficulty: 1, vegan: true },
       ],
     },
     // Recipe Detail
@@ -134,10 +148,10 @@ export const translations = {
       title: '아보카도 & 수란 토스트',
       description: '신선하고 가벼운 고단백 아침 식사. 활기찬 하루를 시작하기에 완벽합니다.',
       time: '15분',
-      energy: '320 kcal',
+      difficulty: 2,
+      difficultyLabels: ['', '아주 쉬움', '쉬움', '보통', '어려움', '매우 어려움'],
       timeLabel: '시간',
       difficultyLabel: '난이도',
-      energyLabel: '열량',
       ingredients: '재료',
       servings: '2인분',
       instructions: '조리 순서',

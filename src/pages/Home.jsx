@@ -60,7 +60,8 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="flex overflow-x-auto gap-4 px-6 snap-x snap-mandatory scrollbar-hide">
+          <div className="flex overflow-x-auto gap-4 snap-x snap-mandatory scrollbar-hide">
+            <div className="shrink-0 w-4" />
             {h.recipes.map((recipe, i) => (
               <Link
                 key={i}
@@ -90,6 +91,7 @@ export default function Home() {
                 </div>
               </Link>
             ))}
+            <div className="shrink-0 w-4" />
           </div>
         </section>
 
@@ -98,7 +100,8 @@ export default function Home() {
           <h2 className="text-slate-900 text-xl font-bold mb-4">{h.categories}</h2>
           <div className="grid grid-cols-2 gap-4">
             {h.categoryList.map((cat, i) => (
-              <div
+              <Link
+                to={`/recipes?category=${encodeURIComponent(cat.label)}`}
                 key={cat.label}
                 className="bg-primary/10 p-4 rounded-2xl flex items-center gap-3 cursor-pointer hover:bg-primary/20 transition-colors"
               >
@@ -106,7 +109,7 @@ export default function Home() {
                   {categoryIcons[i]}
                 </span>
                 <span className="font-bold text-slate-800">{cat.label}</span>
-              </div>
+              </Link>
             ))}
           </div>
         </section>

@@ -3,6 +3,7 @@ import Layout from './components/Layout'
 import Home from './pages/Home'
 import RecipeList from './pages/RecipeList'
 import RecipeDetail from './pages/RecipeDetail'
+import AddRecipe from './pages/AddRecipe'
 import About from './pages/About'
 
 export default function App() {
@@ -11,6 +12,7 @@ export default function App() {
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/recipes" element={<RecipeList />} />
+        <Route path="/recipes/new" element={<AddRecipe />} />
         <Route path="/recipes/:id" element={<RecipeDetail />} />
         <Route path="/about" element={<About />} />
       </Route>
