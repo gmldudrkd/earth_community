@@ -27,42 +27,19 @@ export default function RecipeDetail() {
         <h2 className="text-slate-900 text-lg font-bold leading-tight flex-1 text-center">
           {t.appName}
         </h2>
-        <div className="flex items-center gap-1">
-          <button className="text-slate-900 p-2 hover:bg-slate-100 rounded-full transition-colors">
-            <span className="material-symbols-outlined">share</span>
-          </button>
-          <button className="text-slate-900 p-2 hover:bg-slate-100 rounded-full transition-colors">
-            <span className="material-symbols-outlined">favorite</span>
-          </button>
-        </div>
+        <button className="text-slate-900 p-2 hover:bg-slate-100 rounded-full transition-colors">
+          <span className="material-symbols-outlined">favorite</span>
+        </button>
       </div>
 
       {/* Scrollable Content */}
       <main className="flex-1 overflow-y-auto pb-4">
-        {/* Image Carousel */}
+        {/* Hero Image */}
         <div className="px-4 py-2">
-          <div className="relative group">
-            <div
-              className="bg-cover bg-center flex flex-col justify-end overflow-hidden rounded-2xl aspect-[4/3] shadow-sm"
-              style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800&q=80")' }}
-            >
-              <div className="flex justify-center gap-2 p-5 bg-gradient-to-t from-black/40 to-transparent">
-                <div className="size-2 rounded-full bg-white" />
-                <div className="size-2 rounded-full bg-white/50" />
-                <div className="size-2 rounded-full bg-white/50" />
-              </div>
-            </div>
-            <div className="absolute inset-y-0 left-2 flex items-center">
-              <button className="bg-white/90 p-1 rounded-full shadow-md text-slate-800 hover:bg-white transition-colors">
-                <span className="material-symbols-outlined">chevron_left</span>
-              </button>
-            </div>
-            <div className="absolute inset-y-0 right-2 flex items-center">
-              <button className="bg-white/90 p-1 rounded-full shadow-md text-slate-800 hover:bg-white transition-colors">
-                <span className="material-symbols-outlined">chevron_right</span>
-              </button>
-            </div>
-          </div>
+          <div
+            className="bg-cover bg-center overflow-hidden rounded-2xl aspect-[4/3] shadow-sm"
+            style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800&q=80")' }}
+          />
         </div>
 
         {/* Title & Info */}
@@ -71,21 +48,21 @@ export default function RecipeDetail() {
           <p className="text-slate-500 text-sm mb-6">{r.description}</p>
 
           {/* Quick Info Bar */}
-          <div className="flex gap-4 p-4 bg-slate-50 rounded-2xl mb-8">
-            <div className="flex flex-1 flex-col items-center gap-1 border-r border-slate-200">
-              <span className="material-symbols-outlined text-primary">schedule</span>
-              <p className="text-slate-900 text-xs font-bold uppercase tracking-wider">{r.timeLabel}</p>
-              <p className="text-slate-600 text-sm font-medium">{r.time}</p>
+          <div className="flex items-center gap-4 mb-8">
+            <div className="flex items-center gap-1.5 text-slate-500">
+              <span className="material-symbols-outlined text-base">schedule</span>
+              <span className="text-sm font-medium">{r.time}</span>
             </div>
-            <div className="flex flex-1 flex-col items-center gap-1 border-r border-slate-200">
-              <span className="material-symbols-outlined text-primary">eco</span>
-              <p className="text-slate-900 text-xs font-bold uppercase tracking-wider">{r.difficultyLabel}</p>
-              <p className="text-primary text-sm font-medium">🌱🌱</p>
-            </div>
-            <div className="flex flex-1 flex-col items-center gap-1">
-              <span className="material-symbols-outlined text-primary">local_fire_department</span>
-              <p className="text-slate-900 text-xs font-bold uppercase tracking-wider">{r.energyLabel}</p>
-              <p className="text-slate-600 text-sm font-medium">{r.energy}</p>
+            <div className="flex items-center gap-0.5">
+              <div className="flex items-center gap-0.5 text-primary">
+                {Array.from({ length: r.difficulty }).map((_, j) => (
+                  <span key={j} className="material-symbols-outlined text-base">potted_plant</span>
+                ))}
+                {Array.from({ length: 5 - r.difficulty }).map((_, j) => (
+                  <span key={j} className="material-symbols-outlined text-base text-slate-200">potted_plant</span>
+                ))}
+              </div>
+              <span className="text-sm font-medium text-slate-500 ml-1">{r.difficultyLabels[r.difficulty]}</span>
             </div>
           </div>
         </div>

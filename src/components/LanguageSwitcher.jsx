@@ -1,7 +1,7 @@
 import { useLanguage } from '../i18n/LanguageContext'
 
 const languages = [
-  { code: 'ko', flag: '🇰🇷', label: '한국어' },
+  { code: 'ko', flag: '🇰🇷', label: 'KOR' },
   { code: 'en', flag: '🇺🇸', label: 'EN' },
 ]
 
