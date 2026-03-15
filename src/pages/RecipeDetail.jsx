@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useLanguage } from '../i18n/LanguageContext'
-import Logo from '../components/Logo'
 import { fetchRecipeWithIngredients, incrementViewCount, toggleLike, isRecipeLiked } from '../lib/recipes'
 
 const CATEGORY_LABELS = {
@@ -81,9 +80,7 @@ export default function RecipeDetail() {
         >
           <span className="material-symbols-outlined">arrow_back</span>
         </button>
-        <div className="flex-1 flex justify-center">
-          <Logo size="sm" />
-        </div>
+        <div className="flex-1" />
         <button
           onClick={handleLike}
           className="p-2 hover:bg-slate-100 rounded-full transition-colors relative"
@@ -245,13 +242,13 @@ export default function RecipeDetail() {
                     <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold">
                       {i + 1}
                     </div>
-                    <div className="flex-1">
-                      <p className="text-slate-700 leading-relaxed mb-3">
+                    <div className="flex-1 flex gap-4 items-start">
+                      <p className="flex-1 text-slate-700 leading-relaxed">
                         {typeof step === 'string' ? step : step.text}
                       </p>
                       {step.image_url && (
                         <div
-                          className="w-full h-48 lg:h-72 rounded-xl bg-cover bg-center"
+                          className="flex-shrink-0 w-24 h-24 lg:w-32 lg:h-32 rounded-xl bg-cover bg-center"
                           style={{ backgroundImage: `url("${step.image_url}")` }}
                         />
                       )}
