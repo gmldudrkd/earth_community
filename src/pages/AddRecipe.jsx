@@ -226,7 +226,7 @@ export default function AddRecipe() {
 
         {/* Scrollable Content */}
         <div className="flex-1 overflow-y-auto">
-          <div className="flex flex-col gap-6 p-6">
+          <div className="flex flex-col gap-6 p-6 max-w-3xl mx-auto lg:py-10">
             {/* Media Upload */}
             <input
               ref={mainImageRef}
@@ -598,7 +598,7 @@ export default function AddRecipe() {
         </div>
 
         {/* Sticky Bottom Save Button */}
-        <div className="mt-auto p-6 pb-10 bg-gradient-to-t from-white via-white to-transparent">
+        <div className="mt-auto p-6 pb-10 bg-gradient-to-t from-white via-white to-transparent max-w-3xl mx-auto w-full">
           <button
             onClick={handleSave}
             disabled={saving}
