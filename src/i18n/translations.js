@@ -1,7 +1,7 @@
 export const translations = {
   en: {
     // Common
-    appName: 'One Light Meal',
+    appName: 'OMG Table',
     // Bottom Nav
     nav: { home: 'Home', recipe: 'Recipe', about: 'About' },
     // Home
@@ -41,10 +41,12 @@ export const translations = {
         { label: '100% Plant', icon: 'spa', key: 'vegan' },
         { label: 'Egg/Dairy OK', icon: 'egg_alt', key: 'dairy-ok' },
         { label: 'Under 15 min', icon: 'timer', key: 'quick' },
-        { label: 'Few Ingredients', icon: 'kitchen', key: 'simple' },
         { label: 'Beginner', icon: 'potted_plant', key: 'beginner' },
       ],
       difficultyLabels: ['', 'Very Easy', 'Easy', 'Normal', 'Hard', 'Very Hard'],
+      sortByDate: 'Latest',
+      sortByLikes: 'Most Liked',
+      noResults: 'No recipes found. Try different keywords or filters.',
       recipes: [
         { title: 'Crispy Tofu Stir-fry', time: '20 min', difficulty: 3, vegan: true },
         { title: 'Pesto Whole Grain Pasta', time: '15 min', difficulty: 2, vegan: true },
@@ -81,7 +83,7 @@ export const translations = {
     // About
     about: {
       header: 'Our Story',
-      heroText: 'Why One Light Meal? Because a single pleasant meal creates more change than a perfect lifestyle.',
+      heroText: 'Why OMG Table? Because a single pleasant meal creates more change than a perfect lifestyle.',
       whyTitle: 'No guilt, no pressure.',
       whyDesc: 'Just a delicious plant-based choice for your day.',
       principles: [
@@ -93,7 +95,7 @@ export const translations = {
   },
   ko: {
     // Common
-    appName: 'One Light Meal',
+    appName: 'OMG Table',
     // Bottom Nav
     nav: { home: 'Home', recipe: 'Recipe', about: 'About' },
     // Home
@@ -133,10 +135,12 @@ export const translations = {
         { label: '완전 식물성', icon: 'spa', key: 'vegan' },
         { label: '달걀/유제품 먹어요', icon: 'egg_alt', key: 'dairy-ok' },
         { label: '15분 이내 요리', icon: 'timer', key: 'quick' },
-        { label: '냉장고 재료 적음', icon: 'kitchen', key: 'simple' },
         { label: '초보용', icon: 'potted_plant', key: 'beginner' },
       ],
       difficultyLabels: ['', '아주 쉬움', '쉬움', '보통', '어려움', '매우 어려움'],
+      sortByDate: '최신순',
+      sortByLikes: '좋아요순',
+      noResults: '레시피를 찾을 수 없습니다. 다른 키워드나 필터를 시도해보세요.',
       recipes: [
         { title: '바삭 두부 볶음', time: '20분', difficulty: 3, vegan: true },
         { title: '페스토 통곡물 파스타', time: '15분', difficulty: 2, vegan: true },
@@ -173,7 +177,7 @@ export const translations = {
     // About
     about: {
       header: '우리의 이야기',
-      heroText: '왜 One Light Meal일까요? 완벽한 식단보다, 기분 좋은 한 끼가 더 큰 변화를 만드니까요.',
+      heroText: '왜 OMG Table일까요? 완벽한 식단보다, 기분 좋은 한 끼가 더 큰 변화를 만드니까요.',
       whyTitle: '죄책감도, 부담도 없이.',
       whyDesc: '오늘 하루, 맛있는 식물성 한 끼를 선택하세요.',
       principles: [
