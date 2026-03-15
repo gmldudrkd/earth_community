@@ -34,6 +34,7 @@ export default function AddRecipe() {
   const [servings, setServings] = useState('')
   const [category, setCategory] = useState('all')
   const [difficulty, setDifficulty] = useState(1)
+  const [phoneLast, setPhoneLast] = useState('')
   const [password, setPassword] = useState('')
   const [passwordError, setPasswordError] = useState('')
   const [saving, setSaving] = useState(false)
@@ -126,6 +127,11 @@ export default function AddRecipe() {
   const updateStep = (index, text) =>
     setSteps((prev) => prev.map((s, i) => (i === index ? { ...s, text } : s)))
 
+  const handlePhoneLastChange = (value) => {
+    const digits = value.replace(/\D/g, '').slice(0, 4)
+    setPhoneLast(digits)
+  }
+
   const handlePasswordChange = (value) => {
     const digits = value.replace(/\D/g, '').slice(0, 6)
     setPassword(digits)
@@ -151,6 +157,10 @@ export default function AddRecipe() {
     }
     if (!steps.some((s) => s.text.trim())) {
       setValidationMessage(isKo ? '조리 순서를 1단계 이상 입력해주세요.' : 'Please add at least one step.')
+      return
+    }
+    if (phoneLast.length !== 4) {
+      setValidationMessage(isKo ? '휴대폰 끝번호 4자리를 입력해주세요.' : 'Please enter last 4 digits of phone number.')
       return
     }
     if (password.length !== 6) {
@@ -196,6 +206,7 @@ export default function AddRecipe() {
         difficulty,
         ingredients: ingredientList,
         steps: stepList,
+        phone_last: phoneLast,
         password,
       })
 
@@ -530,15 +541,14 @@ export default function AddRecipe() {
                       </button>
                     </div>
                   ) : (
-                    <div
+                    <button
+                      type="button"
                       onClick={() => stepImageRefs.current[i]?.click()}
-                      className="w-full aspect-video rounded-lg bg-white border border-slate-100 flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-slate-50 transition-colors"
+                      className="self-start flex items-center gap-1.5 text-slate-400 hover:text-primary text-xs font-medium transition-colors"
                     >
-                      <span className="material-symbols-outlined text-slate-400">add_photo_alternate</span>
-                      <span className="text-slate-400 text-xs font-medium">
-                        {isKo ? '단계 사진 추가' : 'Add step photo'}
-                      </span>
-                    </div>
+                      <span className="material-symbols-outlined text-base">add_photo_alternate</span>
+                      {isKo ? '사진 추가 (선택)' : 'Add photo (optional)'}
+                    </button>
                   )}
                   <textarea
                     className="w-full rounded-lg border-transparent bg-white text-slate-900 focus:border-primary focus:ring-primary min-h-[80px] p-4 text-sm resize-none outline-none"
@@ -557,40 +567,75 @@ export default function AddRecipe() {
               </button>
             </div>
 
-            {/* 6-digit Password - 맨 아래 */}
-            <div className="flex flex-col gap-2 mt-4 pt-6 border-t border-slate-100">
-              <label className="text-slate-900 text-sm font-semibold px-1">
-                {isKo ? '관리 비밀번호 (숫자 6자리)' : 'Management Password (6 digits)'}
-                <span className="text-red-400 ml-0.5">*</span>
-              </label>
-              <p className="text-slate-400 text-xs px-1">
-                {isKo
-                  ? '레시피 수정/삭제 요청 시 필요합니다.'
-                  : 'Required when requesting recipe edit/delete.'}
-              </p>
-              <input
-                className={`w-full rounded-full border bg-white text-slate-900 focus:ring-primary h-14 px-6 text-base outline-none tracking-[0.5em] text-center font-mono ${
-                  passwordError ? 'border-red-400 focus:border-red-400' : 'border-slate-200 focus:border-primary'
-                }`}
-                placeholder="000000"
-                type="password"
-                inputMode="numeric"
-                maxLength={6}
-                value={password}
-                onChange={(e) => handlePasswordChange(e.target.value)}
-              />
-              {passwordError && (
-                <p className="text-red-500 text-xs px-1">{passwordError}</p>
-              )}
-              <div className="flex gap-1 justify-center mt-1">
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className={`w-3 h-3 rounded-full transition-colors ${
-                      i < password.length ? 'bg-primary' : 'bg-slate-200'
-                    }`}
-                  />
-                ))}
+            {/* Phone & Password - 맨 아래 */}
+            <div className="flex flex-col gap-5 mt-4 pt-6 border-t border-slate-100">
+              {/* 휴대폰 끝번호 */}
+              <div className="flex flex-col gap-2">
+                <label className="text-slate-900 text-sm font-semibold px-1">
+                  {isKo ? '휴대폰 끝번호 (4자리)' : 'Phone Last 4 Digits'}
+                  <span className="text-red-400 ml-0.5">*</span>
+                </label>
+                <p className="text-slate-400 text-xs px-1">
+                  {isKo
+                    ? '레시피 수정/삭제 요청 시 비밀번호와 함께 본인 확인용으로 사용됩니다.'
+                    : 'Used with password for identity verification when editing/deleting.'}
+                </p>
+                <input
+                  className="w-full rounded-full border border-slate-200 bg-white text-slate-900 focus:border-primary focus:ring-primary h-14 px-6 text-base outline-none tracking-[0.5em] text-center font-mono"
+                  placeholder="0000"
+                  type="tel"
+                  inputMode="numeric"
+                  maxLength={4}
+                  value={phoneLast}
+                  onChange={(e) => handlePhoneLastChange(e.target.value)}
+                />
+                <div className="flex gap-1 justify-center mt-1">
+                  {Array.from({ length: 4 }).map((_, i) => (
+                    <div
+                      key={i}
+                      className={`w-3 h-3 rounded-full transition-colors ${
+                        i < phoneLast.length ? 'bg-primary' : 'bg-slate-200'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* 관리 비밀번호 */}
+              <div className="flex flex-col gap-2">
+                <label className="text-slate-900 text-sm font-semibold px-1">
+                  {isKo ? '관리 비밀번호 (숫자 6자리)' : 'Management Password (6 digits)'}
+                  <span className="text-red-400 ml-0.5">*</span>
+                </label>
+                <p className="text-slate-400 text-xs px-1">
+                  {isKo
+                    ? '레시피 수정/삭제 요청 시 필요합니다.'
+                    : 'Required when requesting recipe edit/delete.'}
+                </p>
+                <input
+                  className={`w-full rounded-full border bg-white text-slate-900 focus:ring-primary h-14 px-6 text-base outline-none tracking-[0.5em] text-center font-mono ${
+                    passwordError ? 'border-red-400 focus:border-red-400' : 'border-slate-200 focus:border-primary'
+                  }`}
+                  placeholder="000000"
+                  type="password"
+                  inputMode="numeric"
+                  maxLength={6}
+                  value={password}
+                  onChange={(e) => handlePasswordChange(e.target.value)}
+                />
+                {passwordError && (
+                  <p className="text-red-500 text-xs px-1">{passwordError}</p>
+                )}
+                <div className="flex gap-1 justify-center mt-1">
+                  {Array.from({ length: 6 }).map((_, i) => (
+                    <div
+                      key={i}
+                      className={`w-3 h-3 rounded-full transition-colors ${
+                        i < password.length ? 'bg-primary' : 'bg-slate-200'
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
 
