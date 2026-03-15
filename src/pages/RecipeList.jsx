@@ -109,9 +109,7 @@ export default function RecipeList() {
 
   // 클라이언트 필터 적용
   const filteredRecipes = useMemo(() => {
-    let list = recipes.length > 0
-      ? recipes
-      : r.recipes.map((rec, i) => ({ ...rec, id: i + 1, _static: true }))
+    let list = recipes
 
     if (activeFilters.includes('vegan')) {
       list = list.filter((rec) => rec.vegan === true)
@@ -120,33 +118,28 @@ export default function RecipeList() {
       list = list.filter((rec) => rec.vegan === false)
     }
     if (activeFilters.includes('quick')) {
-      list = list.filter((rec) => {
-        if (rec._static) return true
-        return rec.prep_time_minutes != null && rec.prep_time_minutes <= 15
-      })
+      list = list.filter((rec) => rec.prep_time_minutes != null && rec.prep_time_minutes <= 15)
     }
     if (activeFilters.includes('beginner')) {
-      list = list.filter((rec) => {
-        if (rec._static) return true
-        return rec.difficulty != null && rec.difficulty === 1
-      })
+      list = list.filter((rec) => rec.difficulty != null && rec.difficulty === 1)
     }
 
     return list
-  }, [recipes, activeFilters, r.recipes])
+  }, [recipes, activeFilters])
 
   return (
     <>
-      {/* Header */}
-      <header className="flex items-center bg-white p-6 pb-2 justify-between shrink-0 sticky top-0 z-10">
+      {/* Header - mobile only */}
+      <header className="flex items-center bg-white p-6 pb-2 justify-between shrink-0 sticky top-0 z-10 lg:hidden">
         <Logo size="sm" showSubtitle />
         <LanguageSwitcher />
       </header>
 
       {/* Scrollable Content */}
       <main className="flex-1 overflow-y-auto">
+        <div className="max-w-7xl mx-auto">
         {/* Search Bar + Add Button */}
-        <form onSubmit={handleSearch} className="flex items-center gap-3 px-6 py-4">
+        <form onSubmit={handleSearch} className="flex items-center gap-3 px-6 lg:px-8 py-4">
           <div className="flex flex-1 items-center rounded-lg bg-slate-100 px-4 py-3 border border-slate-200">
             <span className="material-symbols-outlined text-slate-400">search</span>
             <input
@@ -188,7 +181,7 @@ export default function RecipeList() {
         </form>
 
         {/* Sort Toggle */}
-        <div className="flex items-center gap-2 px-6 pb-2">
+        <div className="flex items-center gap-2 px-6 lg:px-8 pb-2">
           <span className="material-symbols-outlined text-slate-400 text-base">sort</span>
           <button
             onClick={() => setSortBy('created_at')}
@@ -213,7 +206,7 @@ export default function RecipeList() {
         </div>
 
         {/* Category Chips */}
-        <div className="flex gap-2 px-6 pt-2 overflow-x-auto scrollbar-hide">
+        <div className="flex gap-2 px-6 lg:px-8 pt-2 overflow-x-auto scrollbar-hide">
           <button
             onClick={() => handleCategoryClick(null)}
             className={`flex h-9 shrink-0 items-center rounded-full px-4 text-sm font-medium transition-all ${
@@ -244,7 +237,7 @@ export default function RecipeList() {
         </div>
 
         {/* Filter Chips */}
-        <div className="flex gap-2 px-6 py-2 overflow-x-auto scrollbar-hide">
+        <div className="flex gap-2 px-6 lg:px-8 py-2 overflow-x-auto scrollbar-hide">
           {r.filters.map((filter) => {
             const isActive = activeFilters.includes(filter.key)
             return (
@@ -269,7 +262,7 @@ export default function RecipeList() {
         </div>
 
         {/* Recipe Feed */}
-        <div className="p-6 space-y-5 pb-4">
+        <div className="p-6 lg:px-8 pb-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
           {filteredRecipes.length === 0 && loaded && (
             <div className="text-center py-12 text-slate-400">
               <span className="material-symbols-outlined text-4xl mb-2 block">search_off</span>
@@ -277,7 +270,6 @@ export default function RecipeList() {
             </div>
           )}
           {filteredRecipes.map((recipe, i) => {
-            const isStatic = recipe._static
             const imageUrl = recipe.image_url || FALLBACK_IMAGES[i % FALLBACK_IMAGES.length]
 
             return (
@@ -307,33 +299,27 @@ export default function RecipeList() {
                   </div>
 
                   {/* Like Button on Card */}
-                  {!isStatic && (
-                    <button
-                      onClick={(e) => handleLike(e, recipe.id)}
-                      className="absolute top-3 right-3 bg-white/90 backdrop-blur rounded-full p-2 hover:bg-white transition-colors flex items-center gap-1"
-                    >
-                      <span className={`material-symbols-outlined text-base ${
-                        likedMap[recipe.id] ? 'text-red-500 icon-filled' : 'text-slate-400'
-                      }`}>
-                        favorite
-                      </span>
-                      {recipe.like_count > 0 && (
-                        <span className="text-xs font-bold text-slate-700">{recipe.like_count}</span>
-                      )}
-                    </button>
-                  )}
+                  <button
+                    onClick={(e) => handleLike(e, recipe.id)}
+                    className="absolute top-3 right-3 bg-white/90 backdrop-blur rounded-full p-2 hover:bg-white transition-colors flex items-center gap-1"
+                  >
+                    <span className={`material-symbols-outlined text-base ${
+                      likedMap[recipe.id] ? 'text-red-500 icon-filled' : 'text-slate-400'
+                    }`}>
+                      favorite
+                    </span>
+                    {recipe.like_count > 0 && (
+                      <span className="text-xs font-bold text-slate-700">{recipe.like_count}</span>
+                    )}
+                  </button>
                 </div>
                 <div className="p-4">
                   <h3 className="text-lg font-bold text-slate-900 mb-3">{recipe.title}</h3>
                   <div className="flex items-center gap-3">
-                    {/* Cooking Time */}
                     <div className="flex items-center gap-1.5 text-slate-500">
                       <span className="material-symbols-outlined text-base">schedule</span>
-                      <span className="text-xs font-medium">
-                        {isStatic ? recipe.time : recipe.prep_time}
-                      </span>
+                      <span className="text-xs font-medium">{recipe.prep_time}</span>
                     </div>
-                    {/* Difficulty */}
                     <div className="flex items-center gap-0.5">
                       <div className="flex items-center gap-0.5 text-primary">
                         {Array.from({ length: recipe.difficulty || 1 }).map((_, j) => (
@@ -347,18 +333,16 @@ export default function RecipeList() {
                         {r.difficultyLabels[recipe.difficulty || 1]}
                       </span>
                     </div>
-                    {/* View Count */}
-                    {!isStatic && (
-                      <span className="text-slate-400 text-xs flex items-center gap-0.5 ml-auto">
-                        <span className="material-symbols-outlined text-xs">visibility</span>
-                        {recipe.view_count || 0}
-                      </span>
-                    )}
+                    <span className="text-slate-400 text-xs flex items-center gap-0.5 ml-auto">
+                      <span className="material-symbols-outlined text-xs">visibility</span>
+                      {recipe.view_count || 0}
+                    </span>
                   </div>
                 </div>
               </Link>
             )
           })}
+        </div>
         </div>
       </main>
     </>

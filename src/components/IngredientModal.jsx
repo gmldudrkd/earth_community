@@ -92,9 +92,9 @@ export default function IngredientModal({ isOpen, onClose, selected, onConfirm, 
   const canConfirmCustom = customName.trim() !== '' && customCategory !== null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center">
+    <div className="fixed inset-0 z-50 flex items-end lg:items-center justify-center">
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
-      <div className="relative w-full max-w-md bg-white rounded-t-3xl shadow-2xl flex flex-col max-h-[90vh] animate-slide-up">
+      <div className="relative w-full max-w-md bg-white rounded-t-3xl lg:rounded-3xl shadow-2xl flex flex-col max-h-[90vh] animate-slide-up">
         {/* Header */}
         <div className="flex items-center justify-between p-5 pb-3 border-b border-slate-100">
           <button onClick={onClose} className="text-slate-900">

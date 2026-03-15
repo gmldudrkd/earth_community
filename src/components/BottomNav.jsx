@@ -11,7 +11,7 @@ export default function BottomNav() {
   const { t } = useLanguage()
 
   return (
-    <nav className="shrink-0 bg-white/80 backdrop-blur-lg border-t border-neutral-light flex justify-around items-center px-4 py-3">
+    <nav className="shrink-0 bg-white/80 backdrop-blur-lg border-t border-neutral-light flex justify-around items-center px-4 py-3 lg:max-w-2xl lg:mx-auto lg:w-full">
       {tabDefs.map(({ to, icon, key }) => (
         <NavLink
           key={to}
