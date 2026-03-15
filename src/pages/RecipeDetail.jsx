@@ -1,0 +1,147 @@
+import { useNavigate } from 'react-router-dom'
+import { useLanguage } from '../i18n/LanguageContext'
+import LanguageSwitcher from '../components/LanguageSwitcher'
+
+const stepImages = [
+  'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80',
+  null,
+  'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=600&q=80',
+  null,
+]
+
+export default function RecipeDetail() {
+  const navigate = useNavigate()
+  const { t } = useLanguage()
+  const r = t.recipeDetail
+
+  return (
+    <>
+      {/* Top Navigation */}
+      <div className="flex items-center bg-white/80 backdrop-blur-md p-4 justify-between shrink-0 sticky top-0 z-20">
+        <button
+          onClick={() => navigate(-1)}
+          className="text-slate-900 p-2 hover:bg-slate-100 rounded-full transition-colors"
+        >
+          <span className="material-symbols-outlined">arrow_back</span>
+        </button>
+        <h2 className="text-slate-900 text-lg font-bold leading-tight flex-1 text-center">
+          {t.appName}
+        </h2>
+        <div className="flex items-center gap-1">
+          <button className="text-slate-900 p-2 hover:bg-slate-100 rounded-full transition-colors">
+            <span className="material-symbols-outlined">share</span>
+          </button>
+          <button className="text-slate-900 p-2 hover:bg-slate-100 rounded-full transition-colors">
+            <span className="material-symbols-outlined">favorite</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Scrollable Content */}
+      <main className="flex-1 overflow-y-auto pb-4">
+        {/* Image Carousel */}
+        <div className="px-4 py-2">
+          <div className="relative group">
+            <div
+              className="bg-cover bg-center flex flex-col justify-end overflow-hidden rounded-2xl aspect-[4/3] shadow-sm"
+              style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800&q=80")' }}
+            >
+              <div className="flex justify-center gap-2 p-5 bg-gradient-to-t from-black/40 to-transparent">
+                <div className="size-2 rounded-full bg-white" />
+                <div className="size-2 rounded-full bg-white/50" />
+                <div className="size-2 rounded-full bg-white/50" />
+              </div>
+            </div>
+            <div className="absolute inset-y-0 left-2 flex items-center">
+              <button className="bg-white/90 p-1 rounded-full shadow-md text-slate-800 hover:bg-white transition-colors">
+                <span className="material-symbols-outlined">chevron_left</span>
+              </button>
+            </div>
+            <div className="absolute inset-y-0 right-2 flex items-center">
+              <button className="bg-white/90 p-1 rounded-full shadow-md text-slate-800 hover:bg-white transition-colors">
+                <span className="material-symbols-outlined">chevron_right</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Title & Info */}
+        <div className="px-6 pt-6 pb-2">
+          <h1 className="text-slate-900 text-3xl font-bold leading-tight mb-2">{r.title}</h1>
+          <p className="text-slate-500 text-sm mb-6">{r.description}</p>
+
+          {/* Quick Info Bar */}
+          <div className="flex gap-4 p-4 bg-slate-50 rounded-2xl mb-8">
+            <div className="flex flex-1 flex-col items-center gap-1 border-r border-slate-200">
+              <span className="material-symbols-outlined text-primary">schedule</span>
+              <p className="text-slate-900 text-xs font-bold uppercase tracking-wider">{r.timeLabel}</p>
+              <p className="text-slate-600 text-sm font-medium">{r.time}</p>
+            </div>
+            <div className="flex flex-1 flex-col items-center gap-1 border-r border-slate-200">
+              <span className="material-symbols-outlined text-primary">eco</span>
+              <p className="text-slate-900 text-xs font-bold uppercase tracking-wider">{r.difficultyLabel}</p>
+              <p className="text-primary text-sm font-medium">🌱🌱</p>
+            </div>
+            <div className="flex flex-1 flex-col items-center gap-1">
+              <span className="material-symbols-outlined text-primary">local_fire_department</span>
+              <p className="text-slate-900 text-xs font-bold uppercase tracking-wider">{r.energyLabel}</p>
+              <p className="text-slate-600 text-sm font-medium">{r.energy}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Ingredients */}
+        <div className="px-6 mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xl font-bold text-slate-900">{r.ingredients}</h3>
+            <span className="text-sm text-primary font-semibold">{r.servings}</span>
+          </div>
+          <ul className="space-y-3">
+            {r.ingredientList.map((ing) => (
+              <li key={ing.name} className="flex items-center justify-between p-3 bg-slate-50 rounded-xl">
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 rounded-full bg-primary" />
+                  {ing.tip ? (
+                    <div className="relative group/tip">
+                      <span className="text-slate-700 border-b border-dotted border-slate-400 cursor-help">{ing.name}</span>
+                      <div className="absolute bottom-full left-0 mb-2 w-48 p-2 bg-slate-900 text-white text-xs rounded opacity-0 group-hover/tip:opacity-100 transition-opacity pointer-events-none z-10">
+                        <p className="font-bold mb-1 text-primary">{r.tipLabel}</p>
+                        {ing.tip}
+                      </div>
+                    </div>
+                  ) : (
+                    <span className="text-slate-700">{ing.name}</span>
+                  )}
+                </div>
+                <span className="text-slate-500 font-medium">{ing.amount}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Instructions */}
+        <div className="px-6 mb-8">
+          <h3 className="text-xl font-bold text-slate-900 mb-6">{r.instructions}</h3>
+          <div className="space-y-8">
+            {r.steps.map((step, i) => (
+              <div key={i} className="flex gap-4">
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold">
+                  {i + 1}
+                </div>
+                <div className="flex-1">
+                  <p className="text-slate-700 leading-relaxed mb-3">{step.text}</p>
+                  {stepImages[i] && (
+                    <div
+                      className="w-full h-32 rounded-xl bg-cover bg-center"
+                      style={{ backgroundImage: `url("${stepImages[i]}")` }}
+                    />
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </main>
+    </>
+  )
+}
