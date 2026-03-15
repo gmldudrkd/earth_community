@@ -103,7 +103,7 @@ export const translations = {
       hero: {
         before: '',
         highlight: '완벽한 비건',
-        after: '보다, 기분 좋은 식물성 한 끼.',
+        after: '보다,\n기분 좋은 식물성 한 끼.',
       },
       search: '레시피, 재료 검색...',
       curatedPicks: 'Curated Picks',
@@ -177,7 +177,7 @@ export const translations = {
     // About
     about: {
       header: '우리의 이야기',
-      heroText: '왜 OMG Table일까요? 완벽한 식단보다, 기분 좋은 한 끼가 더 큰 변화를 만드니까요.',
+      heroText: '왜 OMG Table일까요?\n완벽한 식단보다,\n기분 좋은 한 끼가 더 큰 변화를 만드니까요.',
       whyTitle: '죄책감도, 부담도 없이.',
       whyDesc: '오늘 하루, 맛있는 식물성 한 끼를 선택하세요.',
       principles: [

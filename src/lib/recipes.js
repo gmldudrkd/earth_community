@@ -20,7 +20,7 @@ export async function fetchRecipes({
     .select('id, title, description, image_url, prep_time, prep_time_minutes, category, vegan, difficulty, ingredients, view_count, like_count, created_at, servings')
 
   if (category) {
-    query = query.eq('category', category)
+    query = query.in('category', [category, 'all'])
   }
   if (vegan === true) {
     query = query.eq('vegan', true)
@@ -187,13 +187,14 @@ export function isRecipeLiked(recipeId) {
   return liked.includes(recipeId)
 }
 
-// 비밀번호 검증 후 삭제
-export async function deleteRecipe(recipeId, password) {
+// 비밀번호 + 휴대폰 끝번호 검증 후 삭제
+export async function deleteRecipe(recipeId, password, phoneLast = '') {
   if (noDb) return false
 
   const { data } = await supabase.rpc('delete_recipe_with_password', {
     recipe_id: recipeId,
     input_password: password,
+    input_phone_last: phoneLast,
   })
   return data // true if deleted
 }

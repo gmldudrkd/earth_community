@@ -26,7 +26,7 @@ export default function About() {
                 <span className="material-symbols-outlined text-primary" style={{ fontSize: '120px' }}>eco</span>
               </div>
               <p className="text-primary font-bold text-sm tracking-wide mb-3">WHY OMG TABLE?</p>
-              <p className="text-slate-800 text-2xl lg:text-4xl font-bold leading-snug lg:max-w-2xl">
+              <p className="text-slate-800 text-2xl lg:text-4xl font-bold leading-snug lg:max-w-2xl whitespace-pre-line">
                 {a.heroText}
               </p>
             </div>

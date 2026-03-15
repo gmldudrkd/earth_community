@@ -65,7 +65,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           {/* Hero */}
           <section className="px-6 py-8 lg:py-16 lg:px-8">
-            <h1 className="text-slate-900 text-4xl lg:text-6xl font-bold leading-tight tracking-tight lg:max-w-2xl">
+            <h1 className="text-slate-900 text-4xl lg:text-6xl font-bold leading-tight tracking-tight lg:max-w-2xl whitespace-pre-line">
               {h.hero.before}
               <span className="text-primary">{h.hero.highlight}</span>
               {h.hero.after}
@@ -73,7 +73,7 @@ export default function Home() {
           </section>
 
           {/* Search Bar */}
-          <form onSubmit={handleSearch} className="px-6 mb-8 lg:px-8 lg:max-w-xl">
+          <form onSubmit={handleSearch} className="px-6 mb-8 lg:px-8">
             <div className="flex items-center bg-neutral-light rounded-2xl px-4 py-3 text-slate-500">
               <span className="material-symbols-outlined mr-2">search</span>
               <input
